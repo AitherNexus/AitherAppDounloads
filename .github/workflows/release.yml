@@ -31,14 +31,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout Aither Apps
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
-          repository: AitherForge/AitherApps
+          repository: AitherNexus/AitherApps
           ref: main
           path: AitherApps
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
@@ -50,7 +50,7 @@ jobs:
 
       - name: Build desktop installer
         working-directory: AitherApps/desktop
-        run: npm run dist
+        run: npm run dist -- --publish never
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
